@@ -24,7 +24,7 @@ def predict_fn():
     marriage=["Divorced","Married","Single"]
     maritialstatus=st.selectbox("MaritalStatus",marriage,2)
 
-    test=pd.read_csv('testdata1.csv')
+    test=pd.read_csv('testdata.csv')
     bigli=[]
     columns11=list(test.columns)
 
@@ -59,5 +59,9 @@ def predict_fn():
         import pickle
         filename = 'finalized_model.sav'
         loaded_model = pickle.load(open(filename, 'rb'))
-        print("ans",loaded_model.predict(newdf))
+        ans=loaded_model.predict(newdf)
+        if ans[0]==0:
+            st.write("Congratulations your employee is not going to leave your company. They will stay in your company")
+        else:
+            st.write("OOOPS!!!!!!!!! this employee may leave your company")
         
