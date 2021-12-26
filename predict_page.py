@@ -29,7 +29,7 @@ def predict_fn():
     columns11=list(test.columns)
 
     dic={"StandardHours":80,"EmployeeCount":1}
-    for i in test.iloc[:1,0:26]:
+    for i in test.iloc[:1,1:26]:
         if i=="EmployeeCount" or i=="StandardHours":
             bigli.append(dic[i])
         else:
