@@ -24,12 +24,13 @@ def predict_fn():
     marriage=["Divorced","Married","Single"]
     maritialstatus=st.selectbox("MaritalStatus",marriage,2)
 
-    test=pd.read_csv('testdata.csv')
+    test=pd.read_csv('testdata1.csv')
+
     bigli=[]
     columns11=list(test.columns)
 
     dic={"StandardHours":80,"EmployeeCount":1}
-    for i in test.iloc[:1,1:26]:
+    for i in test.iloc[:1,0:26]:
         if i=="EmployeeCount" or i=="StandardHours":
             bigli.append(dic[i])
         else:
@@ -49,19 +50,20 @@ def predict_fn():
             bigli+=temlis
         else:
             bigli.append(1)
-    a=st.button("okok")
+    a=st.button("Predict Attrition")
 
     if a:
         lst=[bigli]
-        print("lengths of list and test",len(bigli),len(columns11))
         newdf=pd.DataFrame(lst,columns=columns11,dtype=np.int64)
 
         import pickle
         filename = 'finalized_model.sav'
         loaded_model = pickle.load(open(filename, 'rb'))
         ans=loaded_model.predict(newdf)
+        print(ans)
         if ans[0]==0:
             st.write("Congratulations your employee is not going to leave your company. They will stay in your company")
         else:
             st.write("OOOPS!!!!!!!!! this employee may leave your company")
+        
         
