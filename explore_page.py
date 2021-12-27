@@ -28,9 +28,15 @@ def explore_fn():
     sns.countplot(x=attr, hue='Attrition', data = df, palette="colorblind", ax = ax,  edgecolor=sns.color_palette("dark", n_colors = 1))
     plt.title("employees that left and stayed by "+attr)
     st.pyplot(fig3)
+    from PIL import Image
+    image = Image.open('importances.png')
 
-    st.write("better visual of the correlation by using a heat map.")
-    corr=plt.figure(figsize=(14,14))  #14in by 14in
-    sns.heatmap(df.corr(), annot=True, fmt='.0%')
-    st.pyplot(corr)
+    st.image(image, caption='Importance of Features')
+    chek=st.checkbox("Show Heatmap")
+    if chek:
+        st.write("better visual of the correlation by using a heat map.")
+        st.image(Image.open('heatmap.png'))
+        '''corr=plt.figure(figsize=(14,14))  #14in by 14in
+        sns.heatmap(df.corr(), annot=True, fmt='.0%')
+        st.pyplot(corr)'''
     
